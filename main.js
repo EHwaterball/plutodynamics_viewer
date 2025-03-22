@@ -3,6 +3,8 @@ import { MTLLoader } from 'three/addons/loaders/MTLLoader.js';
 import { OBJLoader } from 'three/addons/loaders/OBJLoader.js';
 
 let freeCameraEnabled = false; // Toggle state
+let modelBoundingBox = null; // Declare globally
+
 
 // Toggle free camera control when the user presses `
 document.addEventListener('click', () => {
@@ -106,9 +108,10 @@ function updateCameraMovement() {
 
         const playerSphere = new THREE.Sphere(playerPosition, playerRadius); // Create a sphere around the player for collision
 
-        // if (modelBoundingBox.intersectsSphere(playerSphere)) { // Check if player sphere intersects with model bounding box
-        //     camera.position.copy(oldPosition); // Collision detected, revert to old position
-        // }
+        if (modelBoundingBox.intersectsSphere(playerSphere)) { // Check if player sphere intersects with model bounding box
+            // camera.position.copy(oldPosition); // Collision detected, revert to old position
+            console.log("Collision detected");
+        }
     }
 }
 
